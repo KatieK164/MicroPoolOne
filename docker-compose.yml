@@ -1,0 +1,64 @@
+services:
+  shot-service:
+    build: ./shot-service
+    container_name: shot-service
+    ports:
+      - "8082:8080"
+    #fetches that URL and if it returns a non-zero exit code (i.e. the service is down or unreachable), Docker marks the container as unhealthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  league-service:
+    build: ./league-service
+    container_name: league-service
+    ports:
+      - "8083:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  match-service:
+    build: ./match-service
+    container_name: match-service
+    ports:
+      - "8081:8080"
+    depends_on:
+      shot-service:
+        condition: service_healthy
+      league-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+#kiro explains this JPA + PostgreSQL driver dependencies in project
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      POSTGRES_DB: leaguedb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - micropool-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  micropool-db-data:
