@@ -36,7 +36,7 @@ public class MatchController {
     }
 
     @PostMapping("/{id}/shots")
-    public TakeShotResponse takeShot(@PathVariable String id, @Valid @RequestBody TakeShotRequest request) {
+    public TakeShotResponse takeShot(@PathVariable String id, @Valid @RequestBody TakeShotRequest request) throws InterruptedException {
         return matchService.takeShot(id, request);
     }
 }

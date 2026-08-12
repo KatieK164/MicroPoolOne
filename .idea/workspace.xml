@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a44b02df-efe6-4266-9be8-48ac2300669c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/dto/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/dto/ErrorResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/match-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/match-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/client/ShotServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/client/ShotServiceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/controller/MatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/controller/MatchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/service/MatchServiceFailureTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +52,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.MatchServiceFailureTest.executor": "Run",
+    "JUnit.MatchServiceFailureTest.shotServiceUnavailable_doesNotCorruptMatchState.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -57,9 +61,52 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ekeekat/MicroPoolOne"
+    "last_opened_file_path": "C:/Users/ekeekat/MicroPoolOne",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RunManager" selected="JUnit.MatchServiceFailureTest">
+    <configuration name="MatchServiceFailureTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="match-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.micropool.matchservice.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.micropool.matchservice.service" />
+      <option name="MAIN_CLASS_NAME" value="com.micropool.matchservice.service.MatchServiceFailureTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MatchServiceFailureTest.shotServiceUnavailable_doesNotCorruptMatchState" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="match-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.micropool.matchservice.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.micropool.matchservice.service" />
+      <option name="MAIN_CLASS_NAME" value="com.micropool.matchservice.service.MatchServiceFailureTest" />
+      <option name="METHOD_NAME" value="shotServiceUnavailable_doesNotCorruptMatchState" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MatchServiceFailureTest" />
+        <item itemvalue="JUnit.MatchServiceFailureTest.shotServiceUnavailable_doesNotCorruptMatchState" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
