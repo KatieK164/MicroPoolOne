@@ -1,4 +1,4 @@
-package com.micropool.shotservice;
+package com.micropool;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

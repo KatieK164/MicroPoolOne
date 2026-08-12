@@ -8,6 +8,14 @@
     <artifactId>MicroPool</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>shot-service</module>
+        <module>match-service</module>
+        <module>league-service</module>
+    </modules>
+
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
