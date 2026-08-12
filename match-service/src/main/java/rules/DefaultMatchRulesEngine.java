@@ -1,7 +1,9 @@
 package com.micropool.matchservice.rules;
 import com.micropool.matchservice.model.Match;
 import com.micropool.matchservice.model.ShotOutcome;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DefaultMatchRulesEngine implements MatchRulesEngine {
 
     @Override
