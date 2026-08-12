@@ -14,4 +14,12 @@ public record ShotOutcome(ShotResult result, int resultCode) {
     public boolean isPot() {
         return result == ShotResult.POT_ONE || result == ShotResult.POT_TWO;
     }
+
+    public boolean isFoul() {
+        return result == ShotResult.FOUL;
+    }
+
+    public boolean isMiss() {
+        return result == ShotResult.MISS;
+    }
 }
