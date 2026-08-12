@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ShotCalculator {
 
-    public ShotResult calculate(int angle, int power) {
-        int resultCode = (angle + power) % 10;
+    public ShotResult calculate(int angle, int power, int spin) {
+        int resultCode = (angle + power + spin) % 10;
 
         if (resultCode == 0) {
             return ShotResult.FOUL;
@@ -19,7 +19,7 @@ public class ShotCalculator {
         }
     }
 
-    public int getResultCode(int angle, int power) {
-        return (angle + power) % 10;
+    public int getResultCode(int angle, int power, int spin) {
+        return (angle + power + spin) % 10;
     }
 }

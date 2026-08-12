@@ -16,8 +16,8 @@ public class ShotController {
 
     @PostMapping("/shots")
     public ShotResponse takeShot(@Valid @RequestBody ShotRequest request) {
-        ShotResult result = calculator.calculate(request.getAngle(), request.getPower());
-        int resultCode = calculator.getResultCode(request.getAngle(), request.getPower());
+        ShotResult result = calculator.calculate(request.getAngle(), request.getPower(), request.getSpin());
+        int resultCode = calculator.getResultCode(request.getAngle(), request.getPower(), request.getSpin());
         return new ShotResponse(result.name(), resultCode);
     }
 }

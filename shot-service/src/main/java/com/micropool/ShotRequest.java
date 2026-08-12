@@ -6,22 +6,17 @@ import jakarta.validation.constraints.NotNull;
 
 public class ShotRequest {
 
-    @NotNull(message = "angle is required")
-    @Min(value = 0, message = "angle must be at least 0")
-    @Max(value = 360, message = "angle must be at most 360")
     private Integer angle;
-
-    @NotNull(message = "power is required")
-    @Min(value = 0, message = "power must be at least 0")
-    @Max(value = 100, message = "power must be at most 100")
     private Integer power;
+    private Integer spin;
 
     public ShotRequest() {
     }
 
-    public ShotRequest(Integer angle, Integer power) {
+    public ShotRequest(Integer angle, Integer power, Integer spin) {
         this.angle = angle;
         this.power = power;
+        this.spin = spin;
     }
 
     public Integer getAngle() {
@@ -38,5 +33,13 @@ public class ShotRequest {
 
     public void setPower(Integer power) {
         this.power = power;
+    }
+
+    public Integer getSpin() {
+        return spin;
+    }
+
+    public void setSpin(Integer spin) {
+        this.spin = spin;
     }
 }
