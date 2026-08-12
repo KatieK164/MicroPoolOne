@@ -36,12 +36,11 @@ public class Match {
         this.winner = null;
     }
 
-
+    // used when potting balls in the DefaultMatchRulesEngine
     public void removeBalls(String player, int count) {
+        // fetch player's remaining balls
         List<String> balls = ballsRemaining.get(player);
-        if (balls == null) {
-            throw new IllegalArgumentException("Unknown player: " + player);
-        }
+        // prevents more balls being removed than balls remaining (i.e player tries to pot 2 balls but they only have black remaining)
         int toRemove = Math.min(count, balls.size());
         for (int i = 0; i < toRemove; i++) {
             balls.remove(balls.size() - 1);
@@ -61,7 +60,7 @@ public class Match {
         this.winner = winner;
     }
 
-
+    // used when switching the turn to the opposite player (either player1 or player2)
     public String opponentOf(String player) {
         return player.equals(player1) ? player2 : player1;
     }
@@ -75,6 +74,9 @@ public class Match {
         List<String> balls = ballsRemaining.get(player);
         return balls == null ? 0 : balls.size();
     }
+
+
+    // GETTERS
 
 
     public String getMatchId() {
