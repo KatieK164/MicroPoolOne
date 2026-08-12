@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 public class ShotCalculator {
 
     public ShotResult calculate(int angle, int power, int spin) {
+
         int resultCode = (angle + power + spin) % 10;
 
         if (resultCode == 0) {

@@ -41,7 +41,7 @@ public class MatchService {
         return MatchResponse.from(findOrThrow(matchId));
     }
 
-    public TakeShotResponse takeShot(String matchId, TakeShotRequest request) {
+    public TakeShotResponse takeShot(String matchId, TakeShotRequest request) throws InterruptedException {
         Match match = findOrThrow(matchId);
 
         if (match.getStatus() != MatchStatus.ACTIVE || !request.getPlayer().equals(match.getCurrentTurn())) {

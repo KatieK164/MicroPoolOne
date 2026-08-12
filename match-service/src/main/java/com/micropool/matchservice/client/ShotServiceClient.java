@@ -2,26 +2,49 @@ package com.micropool.matchservice.client;
 
 import com.micropool.matchservice.model.ShotOutcome;
 import com.micropool.matchservice.model.ShotResult;
+import org.springframework.boot.web.client.ClientHttpRequestFactories;
+import org.springframework.boot.web.client.ClientHttpRequestFactorySettings;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
+import java.time.Duration;
+
+import static java.lang.Thread.sleep;
+
 @Component
 public class ShotServiceClient {
 
-    private final RestClient restClient = RestClient.create("http://shot-service:8080");
+    private static final int MAX_ATTEMPTS = 3;
+    private static final long RETRY_DELAY_MS = 200;
 
-    public ShotOutcome takeShot(int angle, int power, int spin) {
-        try {
-            ShotServiceResponse response = restClient.post()
-                    .uri("/shots")
-                    .body(new ShotServiceRequest(angle, power, spin))
-                    .retrieve()
-                    .body(ShotServiceResponse.class);
-            return new ShotOutcome(ShotResult.valueOf(response.result()), response.resultCode());
-        } catch (RestClientException ex) {
-            throw new RuntimeException("SHOT_SERVICE_UNAVAILABLE", ex);
+    private final RestClient restClient = RestClient.builder()
+            .baseUrl("http://shot-service:8080")
+            .requestFactory(ClientHttpRequestFactories.get(
+                    ClientHttpRequestFactorySettings.DEFAULTS
+                            .withConnectTimeout(Duration.ofSeconds(2))
+                            .withReadTimeout(Duration.ofSeconds(3))))
+            .build();
+
+    public ShotOutcome takeShot(int angle, int power, int spin) throws InterruptedException {
+        RestClientException lastError = null;
+        for (int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+            try {
+                ShotServiceResponse response = restClient.post()
+                        .uri("/shots")
+                        .body(new ShotServiceRequest(angle, power, spin))
+                        .retrieve()
+                        .body(ShotServiceResponse.class);
+                return new ShotOutcome(ShotResult.valueOf(response.result()), response.resultCode());
+            } catch (RestClientException ex) {
+                lastError = ex;
+                if (attempt < MAX_ATTEMPTS) sleep(RETRY_DELAY_MS);
+            }
         }
+        throw new ShotServiceUnavailableException("Could not resolve shot outcome, try again", lastError);
+    }
+    private static void sleep(long ms) {
+        try { Thread.sleep(ms); } catch (InterruptedException ie) { Thread.currentThread().interrupt(); }
     }
 
     private record ShotServiceRequest(int angle, int power, int spin) {}
