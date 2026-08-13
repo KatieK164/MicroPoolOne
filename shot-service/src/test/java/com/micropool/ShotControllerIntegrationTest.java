@@ -21,7 +21,7 @@ class ShotControllerIntegrationTest {
     void postShotReturnsOk() throws Exception {
         mockMvc.perform(post("/shots")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"angle\": 45, \"power\": 50}"))
+                        .content("{\"angle\": 45, \"power\": 50, \"spin\": 0}"))
                 .andExpect(status().isOk());
     }
 }

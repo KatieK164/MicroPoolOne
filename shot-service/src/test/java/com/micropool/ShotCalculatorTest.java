@@ -1,10 +1,14 @@
 package com.micropool;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 class ShotCalculatorTest {
+
+
+
+
 
     private final ShotCalculator calculator = new ShotCalculator();
 
@@ -65,4 +69,18 @@ class ShotCalculatorTest {
     void resultCode9IsPotTwo() {
         assertEquals(ShotResult.POT_TWO, calculator.calculate(0, 0, 9));
     }
+
+    @Test
+    void getResultCodeReturnsModulo10() {
+        assertEquals(5, calculator.getResultCode(10, 3, 2));
+    }
+
+    @Test
+    void negativeInputThrowsException() {
+        org.junit.jupiter.api.Assertions.assertThrows(
+            IllegalArgumentException.class,
+            () -> calculator.calculate(-1, 0, 0)
+        );
+    }
+
 }
