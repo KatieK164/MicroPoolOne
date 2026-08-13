@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a44b02df-efe6-4266-9be8-48ac2300669c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/match-service/src/main/java/com/micropool/matchservice/exception/GlobalExceptionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +66,22 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.MatchRulesEngineTest">
+  <component name="RunManager" selected="JUnit.MatchControllerIntegrationTest">
+    <configuration name="MatchControllerIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="match-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.micropool.matchservice.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.micropool.matchservice.service" />
+      <option name="MAIN_CLASS_NAME" value="com.micropool.matchservice.service.MatchControllerIntegrationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MatchRulesEngineTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="match-service" />
       <extension name="coverage">
@@ -131,6 +146,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MatchControllerIntegrationTest" />
         <item itemvalue="JUnit.MatchRulesEngineTest" />
         <item itemvalue="JUnit.MatchRulesEngineTest.miss_switchesTurn" />
         <item itemvalue="JUnit.MatchServiceFailureTest" />
