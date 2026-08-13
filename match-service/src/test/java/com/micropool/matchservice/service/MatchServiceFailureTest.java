@@ -1,5 +1,6 @@
 package com.micropool.matchservice.service;
 
+import com.micropool.matchservice.client.LeagueServiceClient;
 import com.micropool.matchservice.client.ShotServiceClient;
 import com.micropool.matchservice.client.ShotServiceUnavailableException;
 import com.micropool.matchservice.dto.TakeShotRequest;
@@ -21,7 +22,8 @@ class MatchServiceFailureTest {
         // Arrange
         MatchRepository repository = new MatchRepository();
         ShotServiceClient shotServiceClient = mock(ShotServiceClient.class);
-        MatchService matchService = new MatchService(repository, shotServiceClient, new DefaultMatchRulesEngine());
+        LeagueServiceClient leagueServiceClient = mock(LeagueServiceClient.class);
+        MatchService matchService = new MatchService(repository, shotServiceClient, leagueServiceClient, new DefaultMatchRulesEngine());
 
         Match match = new Match("match-1", "alice", "bob");
         repository.save(match);

@@ -7,9 +7,7 @@ import com.micropool.leagueservice.repository.MatchResultRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,11 +38,15 @@ public class LeagueService {
         Map<String, Long> lossesByPlayer = results.stream()
                 .collect(Collectors.groupingBy(MatchResultEntity::getLoser, Collectors.counting()));
 
-        return winsByPlayer.entrySet().stream()
-                .map(e -> new LeaderboardEntry(
-                        e.getKey(),
-                        e.getValue().intValue(),
-                        lossesByPlayer.getOrDefault(e.getKey(), 0L).intValue()
+        Set<String> allPlayers = new HashSet<>();
+        allPlayers.addAll(winsByPlayer.keySet());
+        allPlayers.addAll(lossesByPlayer.keySet());
+
+        return allPlayers.stream()
+                .map(player -> new LeaderboardEntry(
+                        player,
+                        winsByPlayer.getOrDefault(player, 0L).intValue(),
+                        lossesByPlayer.getOrDefault(player, 0L).intValue()
                 ))
                 .sorted(Comparator.comparingInt(LeaderboardEntry::getWins).reversed())
                 .collect(Collectors.toList());

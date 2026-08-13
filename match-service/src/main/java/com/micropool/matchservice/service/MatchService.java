@@ -1,5 +1,6 @@
 package com.micropool.matchservice.service;
 
+import com.micropool.matchservice.client.LeagueServiceClient;
 import com.micropool.matchservice.client.ShotServiceClient;
 import com.micropool.matchservice.dto.CreateMatchRequest;
 import com.micropool.matchservice.dto.MatchResponse;
@@ -22,12 +23,14 @@ public class MatchService {
 
     private final MatchRepository repository;
     private final ShotServiceClient shotServiceClient;
+    private final LeagueServiceClient leagueServiceClient;
     private final MatchRulesEngine rulesEngine;
 
     public MatchService(MatchRepository repository, ShotServiceClient shotServiceClient,
-                         MatchRulesEngine rulesEngine) {
+                        LeagueServiceClient leagueServiceClient, MatchRulesEngine rulesEngine) {
         this.repository = repository;
         this.shotServiceClient = shotServiceClient;
+        this.leagueServiceClient = leagueServiceClient;
         this.rulesEngine = rulesEngine;
     }
 
@@ -51,8 +54,14 @@ public class MatchService {
 
         ShotOutcome outcome = shotServiceClient.takeShot(request.getAngle(), request.getPower(), request.getSpin());
 
+        // save the match state
         ShotProcessingResult result = rulesEngine.process(match, request.getPlayer(), outcome);
         repository.save(match);
+        // if match completed 
+        // send result to league service
+        if (match.getStatus() == MatchStatus.COMPLETED && match.getWinner() != null) {
+            leagueServiceClient.reportResult(matchId, match.getWinner(), match.opponentOf(match.getWinner()));
+        }
 
         return new TakeShotResponse(outcome.result().name(), result.ballsPotted(),
                 result.foul(), result.turnChanged(), MatchResponse.from(match));
